@@ -1,1 +1,1 @@
-# moore-example
+# moore_fsm-example
