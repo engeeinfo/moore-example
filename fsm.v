@@ -77,3 +77,17 @@ always @(current_state) begin
 end
 
 endmodule
+
+module moore_fsm_sd(
+    input clock,
+    input reset,
+    input seq_in,
+    output detector_out
+);
+    seq_dect detector (
+        .clk(clock),
+        .reset(reset),
+        .seq_in(seq_in),
+        .dect_out(detector_out)
+    );
+endmodule

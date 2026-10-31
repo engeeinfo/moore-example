@@ -34,11 +34,19 @@ module moore_fsm_sd_tb;
         seq_in = 1;  #10;  // Apply 1 for 10ns
         seq_in = 0;  #10;  // Apply 0 for 10ns
         seq_in = 1;  #10;  // Apply 1 for 10ns
+        seq_in = 1;  #10;  // Complete the 1011 sequence
+        if (detector_out !== 1'b1) begin
+            $display("FAIL: 1011 sequence was not detected");
+            $finish(1);
+        end
         seq_in = 0;  #10;  // Apply 0 for 10ns
-        seq_in = 1;  #10;  // Apply 1 for 10ns
-        seq_in = 0;  #10;  // Apply 0 for 10ns
+        if (detector_out !== 1'b0) begin
+            $display("FAIL: detector did not clear after a non-matching input");
+            $finish(1);
+        end
         
         // Add more test vectors here if needed
-        #50;        // Wait some more time before finishing the simulation
+        $display("PASS: Moore FSM sequence detection");
+        $finish(0);
     end
 endmodule
